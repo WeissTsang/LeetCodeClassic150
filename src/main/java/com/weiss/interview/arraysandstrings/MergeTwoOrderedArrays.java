@@ -1,4 +1,4 @@
-package com.weiss.interview;
+package com.weiss.interview.arraysandstrings;
 
 public class MergeTwoOrderedArrays {
     public static void main(String[] args) {
