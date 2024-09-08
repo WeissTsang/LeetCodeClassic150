@@ -4,28 +4,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LRUCache {
-    public static void main(String[] args) {
-
-    }
-
-    class Node{
-        int key;
+    class Node {
         int value;
+        int key;
         Node prev;
         Node next;
 
-        public Node(int key, int value) {
-            this.key = key;
+        public Node(int value, int key) {
             this.value = value;
+            this.key = key;
         }
     }
 
     int capacity;
-    Node dummy = new Node(0, 0);
-    Map<Integer, Node> map = new HashMap<>();
-
+    Node dummy = new Node(0, 0);;
+    Map<Integer,Node> map = new HashMap<>();
     public LRUCache(int capacity) {
         this.capacity = capacity;
+
         dummy.prev = dummy;
         dummy.next = dummy;
     }
@@ -49,10 +45,9 @@ public class LRUCache {
         putFront(node);
 
         if (map.size() > capacity) {
-            Node back = dummy.prev;
-            map.remove(back.key);
-            remove(back);
-
+            Node backNode = dummy.prev;
+            map.remove(backNode.key);
+            remove(backNode);
         }
     }
 
@@ -69,16 +64,14 @@ public class LRUCache {
     }
 
     private void putFront(Node node) {
-        node.prev = dummy;
         node.next = dummy.next;
-        node.prev.next = node;
+        dummy.next = node;
         node.next.prev = node;
+        node.prev = dummy;
     }
 
     private void remove(Node node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
-
-
 }
